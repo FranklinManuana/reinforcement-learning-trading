@@ -1,17 +1,17 @@
 import  torch
-import tqdm
+from tqdm import tqdm
 import numpy as np 
 import random
 from sklearn.metrics import r2_score
-import model_settings
+from .model_settings import *
 
 
-from config import device
-from figures import *
-from DQN_model import TradingNet
-from environment import TradingEnv
-from replay import ReplayBuffer
-from evaluate import evaluate
+from .config import device
+from .figures import *
+from .DQN_model import TradingNet
+from .environment import TradingEnv
+from .replay import ReplayBuffer
+from .evaluate import evaluate
 
 def train(train_data, test_data):
     #data = stock_data()

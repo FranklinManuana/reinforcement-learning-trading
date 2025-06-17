@@ -1,6 +1,6 @@
-from environment import TradingEnv
+from .environment import TradingEnv
 import torch
-from config import device
+from .config import device
 # Evaluation
 def evaluate(model, test_data, window_size=30):
     env = TradingEnv(test_data, window_size)
