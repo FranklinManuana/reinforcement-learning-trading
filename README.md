@@ -1,6 +1,6 @@
 # Reinforcement Learning Trading 📈
 
-A complete framework for building, training, testing, and deploying reinforcement learning (RL) agents for algorithmic trading using Python.
+This project implements a Deep Q-Learning (DQN) agent for financial trading using a custom reinforcement learning environment. It is designed to simulate and train a trading agent using historical financial data, neural networks, and experience replay.
 
 ---
 
@@ -8,61 +8,79 @@ A complete framework for building, training, testing, and deploying reinforcemen
 
 This project offers:
 
-- 🔄 A modular **train–test–trade** pipeline (`train.py`, `test.py`, `trade.py`)
-- Multiple **OpenAI Gym-style trading environments**
-- Support for classic and deep RL agents (e.g. DQN, PPO, SAC, etc.)
+- 🔄 A modular design for ease of use and repurposing
 - Integration with real and historical market data sources
 - Utilities for plotting, evaluation, logging, and analysis
 
 ---
 
 ## 📂 Repository Structure
-
-```
-.
-🔹— agents/             # RL agents (e.g. stable‑baselines3, ElegantRL, rllib)
-🔹— env/                # Trading environments (stock / crypto / portfolio)
-🔹— data/               # Raw and processed data loaders & preprocessors
-🔹— config.py           # Global configuration settings
-🔹— train.py            # Train agent on environment
-🔹— test.py             # Evaluate agent on unseen data
-🔹— trade.py            # Simulate paper/live trading
-🔹— plot.py             # Plotting & visualization utilities
-🔹— requirements.txt    # Python dependencies
-🔹— README.md           # <-- you're here 👇
-```
+reinforcement-learning-trading/
+│
+├── output/                          # Output files generated during training/evaluation
+│   ├── figures/                     # Plots and visualizations
+│   └── trained_models/             # Saved model weights/checkpoints
+│
+├── src/                             # Core source code
+│   ├── modules/                     # Modular Python files
+│   │   ├── config.py               # Configuration and seed setup
+│   │   ├── DQN_model.py           # Deep Q-Network (DQN) model architecture
+│   │   ├── environment.py         # Trading environment logic
+│   │   ├── evaluate.py            # Evaluation logic for trained agents
+│   │   ├── figures.py             # Plotting utilities (e.g., loss, R²)
+│   │   ├── model_settings.py      # Hyperparameters and training setup
+│   │   ├── replay.py              # Experience replay buffer implementation
+│   │   ├── stock_data.py          # Stock data loading and preprocessing
+│   │   └── train.py               # Model training loop
+│
+├── notes/                           # (Optional) Notes or experiment logs
+│
+├── main.ipynb                       # Entry-point Jupyter notebook for running the model
+├── README.md                        # Project overview and documentation
 
 ---
 
-## 🚀 Quick Start
+## Phases
 
-1. **Install dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
-2. **Train an agent**
-   ```bash
-   python train.py \
-       --env stock_trading \
-       --agent DQN \
-       --episodes 1000 \
-       --dataset path/to/data.csv
-   ```
-3. **Evaluate performance**
-   ```bash
-   python test.py \
-       --model runs/DQN_model \
-       --env stock_trading \
-       --dataset path/to/test_data.csv
-   ```
-4. **Run a live/ paper trade simulation**
-   ```bash
-   python trade.py \
-       --model runs/DQN_model \
-       --env stock_trading \
-       --live
-   ```
+### 1. Trading Environment
+A custom trading environment built to simulate portfolio management tasks. It tracks:
+- Balance
+- Shares held
+- Net worth
+- Actions: buy, hold, sell
 
+### 2. Network Architecture
+A deep neural network (DQN variant) is constructed using PyTorch. The architecture includes:
+- Fully connected layers
+- LeakyReLU activations
+- Q-value outputs for trading actions
+
+### 3. Replay Buffer
+An experience replay class that stores past transitions (state, action, reward, next state) to sample mini-batches during training. This helps stabilize and decorrelate learning.
+
+### 4. Parameters / Settings
+Hyperparameters include:
+- Learning rate
+- Discount factor (gamma)
+- Epsilon-greedy parameters
+- Batch size
+- Episode length
+
+### 5. Data Loading
+Historical price data is loaded and preprocessed to be used in the environment. Supports:
+- Multiple tickers
+- Train/test splits (e.g., by year)
+
+### 6. Training
+The DQN agent is trained over multiple episodes with:
+- Epsilon-greedy exploration
+- Gradient updates using MSE loss
+- Target Q-value calculation
+
+### 7. Evaluation
+Post-training evaluation includes:
+- Performance visualization (net worth over time)
+- R² and loss logging per iteration
 ---
 
 ## 🎯 Features
@@ -76,38 +94,31 @@ This project offers:
 
 ## 🔧 Configuration
 
-Edit `config.py` to adjust settings such as:
-
+Edit `model_settings.py`  `config.py` to adjust settings such as:
+`model_settings.py`
 - Data source / preprocessing rules
 - Environment parameters (e.g., window size, action space)
 - RL agent hyperparameters (learning rate, gamma, etc.)
 - Logging & checkpoint directories
+`config.py`
 
 ---
 
 ## 📊 Logs & Output
 
-- Checkpoints, metrics, and weights are saved to `runs/<agent>_<env>/`
-- Use `plot.py` or TensorBoard for insights on:
+- plots, metrics, and models are saved to output📂 
+- `figures.py` use to visually display:
   - Training loss & episode returns
-  - Backtest equity curves
-  - Action distributions
-
+  - Portfolio Networth
 ---
-
-## 🧪 Extending the Framework
-
-1. **Add a new environment** — e.g. futures, options — into `env/`
-2. **Integrate a new RL agent** — follow patterns in `agents/`
-3. Register in `train.py` for easy selection via CLI
 
 ---
 
 ## ✅ Requirements
 
-- Python 3.7+
-- Core libraries: `gym`, `numpy`, `pandas`, `matplotlib`
-- RL frameworks: `stable-baselines3`, `elegantrl` (optional), `rllib` (optional)
+- Python 3.9+
+- Core libraries: `torch`, `numpy`, `pandas`, `matplotlib`
+- RL frameworks: optional
 
 ---
 
@@ -122,9 +133,15 @@ Edit `config.py` to adjust settings such as:
 
 ## 📚 References
 
-- **Deep Q-Networks for Trading** (Mnih et al., 2015)
-- **DRL trading frameworks**: FinRL, Q-Trader
-- **OpenAI Gym Trading Envs**
+   📚
+- [yFinance Documentation](https://ranaroussi.github.io/yfinance/)
+- [TensorFlow Introduction to DQN](https://www.tensorflow.org/agents/tutorials/0_intro_rl)
+- [Medium Article on Deep Q-Learning (DQN)](https://medium.com/@samina.amin/deep-q-learning-dqn-71c109586bae) by Samina Amin 2024
+- [Medium Article on Deep Q-Network(DQN)](https://medium.com/@shruti.dhumne/deep-q-network-dqn-90e1a8799871) by Shruti Dhumme
+
+   
+   💻
+- [Making Neural Network From Scratch](https://www.youtube.com/watch?v=w8yWXqWQYmU&t=1325s)
 
 ---
 
@@ -137,8 +154,7 @@ You're welcome to open issues, suggest algorithms, or add new environments. Pull
 ---
 
 ### 🚀 What's next?
-
+- 💸 Include real-world factors: transaction costs, slippage, and order fill assumptions
 - Add risk-sensitive agents like **SAC** or **PPO**
 - Integrate **live data APIs** (e.g. Alpaca, Binance)
 - Add **multi-asset portfolio optimization**
-- Enhance with **order book simulation** and **slippage models**
