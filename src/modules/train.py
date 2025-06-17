@@ -3,9 +3,11 @@ import tqdm
 import numpy as np 
 import random
 from sklearn.metrics import r2_score
+from model_settings import *
 
 
 from config import device
+from figures import *
 from DQN_model import TradingNet
 from environment import TradingEnv
 from replay import ReplayBuffer
@@ -127,33 +129,13 @@ def train(train_data, test_data):
     print("Model saved to", model_path)
 
     # display progress
+    NetWorth_plot()
 
-    plt.plot(net_worth_history)
-    plt.xlabel("Episode")
-    plt.ylabel("Total net worth")
-    plt.title("Net worth per Episode")
-    plt.grid()
-    plt.show()
-
-   # plot R² history
-    plt.plot(r2_history)
-    plt.xlabel("Iteration")
-    plt.ylabel("R² Score")
-    plt.title("R² per Iteration")
-    plt.grid()
-    plt.show()
-
+    # plot R² history
+    R_squared_plot()
 
     # R² and Loss Plot
-    plt.figure(figsize=(10, 5))
-    plt.plot(r2_history, label='R²')
-    plt.plot([l.item() for l in losses], label='Loss')
-    plt.xlabel("Iterations")
-    plt.ylabel("Metric Value")
-    plt.title("R² and Loss Over Iterations")
-    plt.legend()
-    plt.grid()
-    plt.show()
+    R_squared_vs_Loss()
 
 
     # return trained model

@@ -1,4 +1,3 @@
-'''Initial model settings will be here '''
 # model parameter settings
 episodes = 50
 gamma = 0.9999
