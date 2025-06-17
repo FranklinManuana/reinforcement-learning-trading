@@ -3,7 +3,7 @@ import tqdm
 import numpy as np 
 import random
 from sklearn.metrics import r2_score
-from model_settings import *
+import model_settings
 
 
 from config import device
