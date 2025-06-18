@@ -120,7 +120,7 @@ Edit `model_settings.py`  `config.py` to adjust settings such as:
 - Python 3.9+
 - Core libraries: `torch`, `numpy`, `pandas`, `matplotlib`
 - RL frameworks: optional
-
+- CUDA compatible GPU: Optional, if unavailable clone repo into google colab
 ---
 
 ## 📄 Best Practices
