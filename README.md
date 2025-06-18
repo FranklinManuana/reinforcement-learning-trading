@@ -15,6 +15,8 @@ This project offers:
 ---
 
 ## 📂 Repository Structure
+
+```
 reinforcement-learning-trading/
 │
 ├── output/                          # Output files generated during training/evaluation
@@ -37,7 +39,7 @@ reinforcement-learning-trading/
 │
 ├── main.ipynb                       # Entry-point Jupyter notebook for running the model
 ├── README.md                        # Project overview and documentation
-
+```
 ---
 
 ## Phases
