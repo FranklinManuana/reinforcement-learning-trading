@@ -89,8 +89,7 @@ Post-training evaluation includes:
 
 - **Modular environments**: Swap between stock, crypto, or multi-asset paper trading setups.
 - **Multiple RL algorithms**: DQN, Double DQN, PPO, SAC, etc. — easily extendable.
-- **Metrics & plots**: Analyze returns, Sharpe, drawdowns, and compare against baselines.
-- **Real-time trading**: Paper/live trading mode for demo or backtesting.
+- **Metrics & plots**: Analyze returns, fitment, loss value
 
 ---
 
@@ -127,7 +126,6 @@ Edit `model_settings.py`  `config.py` to adjust settings such as:
 ## 📄 Best Practices
 
 - 🧠 Use **non-leaky feature windows** to avoid lookahead bias
-- 💸 Include real-world factors: transaction costs, slippage, and order fill assumptions
 - 🗕️ **Train/test split** should be chronological to mimic real deployment
 - 📍 Maintain **random seed control** for reproducible results
 
@@ -150,8 +148,6 @@ Edit `model_settings.py`  `config.py` to adjust settings such as:
 ## 🛠 Contribution & License
 
 You're welcome to open issues, suggest algorithms, or add new environments. Pull requests are highly appreciated!
-
-**License**: [Your Choice - MIT / Apache 2.0 / etc.]
 
 ---
 
