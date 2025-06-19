@@ -143,13 +143,13 @@ def train(train_data, test_data):
     print("Model saved to", model_path)
 
     # display progress
-    NetWorth_plot()
+    NetWorth_plot(net_worth_history)
 
     # plot R² history
-    R_squared_plot()
+    R_squared_plot(r2_history)
 
     # R² and Loss Plot
-    R_squared_vs_Loss()
+    R_squared_vs_Loss(r2_history, losses)
 
 
     # return trained model
