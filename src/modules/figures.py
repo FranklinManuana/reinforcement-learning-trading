@@ -32,7 +32,7 @@ def R_squared_vs_Loss(r2_history, losses):
     plt.plot([l.item() for l in losses], label='Loss')
     plt.xlabel("Iterations")
     plt.ylabel("Metric Value")
-    plt.ylim(0,1)
+    plt.ylim(bottom = 0)
     plt.title("R² and Loss Over Iterations")
     plt.legend()
     plt.grid()
