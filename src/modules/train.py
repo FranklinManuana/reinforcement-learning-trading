@@ -136,7 +136,7 @@ def train(train_data, test_data):
     
     # save log_data values into dataframe
     df_log_data = pd.DataFrame(log_data)
-    df_log_data.to_csv("output/log_data/log_data.csv")
+    df_log_data.to_csv("../../output/log_data/log_data.csv")
     
     # save model
     torch.save(model.state_dict(),model_path)

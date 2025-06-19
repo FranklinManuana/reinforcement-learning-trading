@@ -8,8 +8,8 @@ def NetWorth_plot(net_worth_history):
     plt.ylabel("Total net worth")
     plt.title("Net worth per Episode")
     plt.grid()
+    plt.savefig("../../output/figures/NetWorth_plot.png")
     plt.show()
-    plt.savefig("output/figures/NetWorth_plot.png")
 
 # plot R² history
 def R_squared_plot(r2_history):
@@ -18,8 +18,8 @@ def R_squared_plot(r2_history):
     plt.ylabel("R² Score")
     plt.title("R² per Iteration")
     plt.grid()
+    plt.savefig("../../output/figures/R2_plot.png")
     plt.show()
-    plt.savefig("output/figures/R2_plot.png")
 
 
 # R² and Loss Plot
@@ -32,5 +32,5 @@ def R_squared_vs_Loss(r2_history, losses):
     plt.title("R² and Loss Over Iterations")
     plt.legend()
     plt.grid()
+    plt.savefig("../../output/figures/R2_loss_plot.png")
     plt.show()
-    plt.savefig("output/figures/R2_loss_plot.png")
