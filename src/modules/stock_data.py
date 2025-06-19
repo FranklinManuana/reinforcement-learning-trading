@@ -3,8 +3,8 @@ from sklearn.preprocessing import MinMaxScaler
 
 
 # Obtain financial data and store it in the 
-def split_data_by_year(ticker='NVDA', train_end_year=2022, test_start_year=2023):
-    data = yf.download(ticker, start="2020-01-01", end="2023-01-12")[["Open", "High", "Low", "Close", "Volume"]]
+def split_data_by_year(ticker='NVDA', train_end_year=2023, test_start_year=2024):
+    data = yf.download(ticker, start="2019-01-01", end="2025-06-10")[["Open", "High", "Low", "Close", "Volume"]]
     data = data.fillna(method='ffill')
     data['Year'] = data.index.year
     train_data = data[data['Year'] <= train_end_year].drop(columns='Year')
