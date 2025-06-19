@@ -41,5 +41,5 @@ def set_seed(seed=42):
 def model_path_name( episodes, save_dir="../output/trained_models"):
     os.makedirs(save_dir, exist_ok=True)
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    filename = f"trained_model_for{episodes}_episodes_{timestamp}.pt"
+    filename = f"trained_model_for_{episodes}_episodes_{timestamp}.pt"
     return filename
