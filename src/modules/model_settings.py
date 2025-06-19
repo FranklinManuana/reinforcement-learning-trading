@@ -1,4 +1,4 @@
-from .config import model_path_name
+from .config import *
 # model parameter settings
 episodes = 1
 gamma = 0.9999
@@ -7,4 +7,4 @@ epsilon_min = 0.01
 epsilon_decay = 0.999
 batch_size = 128
 buffer_capacity = 10000
-model_path = model_path_name(episodes)
+model_path = model_path_name(episodes,TRAINED_DIR)
