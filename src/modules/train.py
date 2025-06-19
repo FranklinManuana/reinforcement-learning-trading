@@ -5,9 +5,10 @@ import pandas as pd
 import random
 from sklearn.metrics import r2_score
 from .model_settings import *
+import os # to reconcile colab dierectory issue
 
 
-from .config import device
+from .config import *
 from .figures import *
 from .DQN_model import TradingNet
 from .environment import TradingEnv
@@ -136,7 +137,7 @@ def train(train_data, test_data):
     
     # save log_data values into dataframe
     df_log_data = pd.DataFrame(log_data)
-    df_log_data.to_csv("../../output/log_data/log_data.csv")
+    df_log_data.to_csv(os.path.join(LOG_DIR, "log_data.csv"))# to reconcile colab dierectory issue
     
     # save model
     torch.save(model.state_dict(),model_path)
