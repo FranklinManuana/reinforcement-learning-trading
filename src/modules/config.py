@@ -12,6 +12,7 @@ LOG_DIR = os.path.join(BASE_DIR, "output/log_data")
 FIGURES_DIR = os.path.join(BASE_DIR, "output/figures")
 TRAINED_DIR = os.path.join(BASE_DIR, "output/trained_models")
 
+
 # Create folders if they don't exist
 os.makedirs(LOG_DIR, exist_ok=True)
 os.makedirs(FIGURES_DIR, exist_ok=True)
@@ -38,7 +39,7 @@ def set_seed(seed=42):
 
 
 # model path name 
-def model_path_name( episodes, save_dir="../output/trained_models"):
+def model_path_name( episodes, save_dir=TRAINED_DIR):
     os.makedirs(save_dir, exist_ok=True)
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     filename = f"trained_model_for_{episodes}_episodes_{timestamp}.pt"
