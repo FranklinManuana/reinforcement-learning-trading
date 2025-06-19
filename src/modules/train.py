@@ -150,7 +150,7 @@ def train(train_data, test_data):
     R_squared_plot(r2_history)
 
     # R² and Loss Plot
-    R_squared_vs_Loss(r2_history, losses, use_log=False)
+    R_squared_vs_Loss(r2_history, losses)
 
 
     # return trained model
