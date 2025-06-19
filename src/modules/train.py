@@ -1,6 +1,7 @@
 import  torch
 from tqdm import tqdm
-import numpy as np 
+import numpy as np
+import pandas as pd 
 import random
 from sklearn.metrics import r2_score
 from .model_settings import *
@@ -37,6 +38,8 @@ def train(train_data, test_data):
     iteration_counter = []
     r2_history = []
 
+    log_data = [] # empty list to store log values for later review 
+
     pbar = tqdm(range(episodes), desc="Training Episodes")
 
     _iteration = 0
@@ -62,6 +65,7 @@ def train(train_data, test_data):
 
              # iteration counter
             _iteration += 1
+
 
             # Replay
             if len(replay_buffer) >= batch_size:
@@ -93,10 +97,16 @@ def train(train_data, test_data):
                 # Calculate R² for this iteration (per episode)
                 r2_val = r2_score(q_targets.detach().cpu().numpy(), q_values_actions.detach().cpu().numpy())
                 r2_history.append(r2_val)
-            
 
-
-
+                # log_data dictionary for iteration values
+                log_data.append({"episode":episode,
+                                 "iteration": _iteration,
+                                 "q_values": q_values_actions,
+                                 "q_targets": q_targets,
+                                 "loss": loss.item(),
+                                 "r2": r2_val,
+                                 "net_worth": env.net_worth})
+    
 
                 optimizer.zero_grad()
                 loss.backward()
@@ -123,6 +133,10 @@ def train(train_data, test_data):
         all_qvalues = torch.cat([q.gather(1, torch.argmax(q, dim=1, keepdim=True)).squeeze() for q in qvalues_history]).detach().cpu().numpy()
         final_r2 = r2_score(all_qtargets, all_qvalues)
         print(f"Final R² across training: {final_r2:.4f}")
+    
+    # save log_data values into dataframe
+    df_log_data = pd.DataFrame(log_data)
+    df_log_data.to_csv("output/log_data/log_data.csv")
     
     # save model
     torch.save(model.state_dict(),model_path)
